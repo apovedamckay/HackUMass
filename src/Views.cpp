@@ -368,3 +368,85 @@ bool WelcomeView::drawWorld(){
 
 bool WelcomeView::deactivate(){
 }
+
+MedsView::MedsView(EventController* controller)
+: myController(controller), screen(loadImage("meds.png"))
+{
+}
+
+MedsView::~MedsView(){
+    SDL_DestroyTexture(screen);
+    for(auto& b : meds.elements){
+        SDL_DestroyTexture(b->box);
+    }
+}
+
+bool MedsView::activate(){
+    SDL_GetWindowSize(window, &w, &h);
+    for(int i=0; i<3; i++){
+        InputBox* tBox = new InputBox;
+        tBox->position = SDL_Rect{0, i*h/8 + h/8, 5*w/8, h/8};
+        tBox->box = loadImage("textBox.png");
+        tBox->font = TTF_OpenFont("Font.otf", h/12);
+        myEvents.push_back(std::make_shared<InputEventProcessor>(myController, tBox));
+        myEvents.push_back(std::make_shared<EditEventProcessor>(myController, tBox));
+        myEvents.push_back(std::make_shared<InFDownEventProcessor>(myController, tBox));
+        myEvents.push_back(std::make_shared<InKeyEventProcessor>(myController, tBox));
+        meds.elements.push_back(tBox);
+        tBox = new InputBox;
+        tBox->position = SDL_Rect{5*w/8, i*h/8 + h/8, 3*w/8, h/8};
+        tBox->box = loadImage("textBox.png");
+        tBox->font = TTF_OpenFont("Font.otf", h/12);
+        myEvents.push_back(std::make_shared<InputEventProcessor>(myController, tBox));
+        myEvents.push_back(std::make_shared<EditEventProcessor>(myController, tBox));
+        myEvents.push_back(std::make_shared<InFDownEventProcessor>(myController, tBox));
+        myEvents.push_back(std::make_shared<InKeyEventProcessor>(myController, tBox));
+        meds.elements.push_back(tBox);
+    }
+
+    //views.push_back(std::make_shared<RankView>(myController));
+    views.push_back(std::make_shared<SleepingView>(myController));
+    myEvents.push_back(std::make_shared<FVMotionEventProcessor>(myController, &meds));
+    myEvents.push_back(std::make_shared<SwipeDownEventProcesor>(myController, this));
+    myEvents.push_back(std::make_shared<QuitKeyEventProcessor>(myController, this));
+}
+
+bool MedsView::updateWorld(){
+    if(!meds.elements.back()->text.empty()){
+        InputBox* tBox = new InputBox;
+        tBox->position = SDL_Rect{0, meds.elements.size()*h/8 + h/4, 5*w/8, h/8};
+        tBox->box = loadImage("textBox.png");
+        tBox->font = TTF_OpenFont("Font.otf", h/12);
+        myEvents.push_back(std::make_shared<InputEventProcessor>(myController, tBox));
+        myEvents.push_back(std::make_shared<EditEventProcessor>(myController, tBox));
+        myEvents.push_back(std::make_shared<InFDownEventProcessor>(myController, tBox));
+        myEvents.push_back(std::make_shared<InKeyEventProcessor>(myController, tBox));
+        meds.elements.push_back(tBox);
+        tBox = new InputBox;
+        tBox->position = SDL_Rect{5*w/8, (meds.elements.size()/2)*h/8 + h/4, 3*w/8, h/8};
+        tBox->box = loadImage("textBox.png");
+        tBox->font = TTF_OpenFont("Font.otf", h/12);
+        myEvents.push_back(std::make_shared<InputEventProcessor>(myController, tBox));
+        myEvents.push_back(std::make_shared<EditEventProcessor>(myController, tBox));
+        myEvents.push_back(std::make_shared<InFDownEventProcessor>(myController, tBox));
+        myEvents.push_back(std::make_shared<InKeyEventProcessor>(myController, tBox));
+        meds.elements.push_back(tBox);
+
+    }
+    return !done;
+}
+
+bool MedsView::drawWorld(){
+    SDL_RenderCopy(renderer, screen, nullptr, nullptr);
+    meds.draw();
+    return !done;
+}
+
+bool MedsView::deactivate(){
+    for(int i=0; i<meds.elements.size()-1; i+=2){
+    for(int i=0; i<meds.elements.size()-1; i+=2){
+        if(meds.elements[i]->text.empty() || meds.elements[i+1]->text.empty()) continue;
+        testsJson[i/2]["subject"] = meds.elements[i]->text;
+        testsJson[i/2]["time"] = meds.elements[i+1]->text;
+    }
+}
