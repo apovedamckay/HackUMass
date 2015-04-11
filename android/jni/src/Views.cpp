@@ -84,10 +84,9 @@ WelcomeView::WelcomeView(EventController* controller)
     int w, h;
     SDL_GetWindowSize(window, &w, &h);
     meds.box = loadImage("medsBox.png");
-    meds.position = SDL_Rect{w/8, h/4, 3*w/4, h/4};
-    tests.box = loadImage("testsBox");
+    meds.position = SDL_Rect{w/8, 3*h/4, 3*w/4, h/4};
+    tests.box = loadImage("testsBox.png");
     tests.position = SDL_Rect{w/8, h/2, 3*w/4, h/4};
-
 }
 
 WelcomeView::~WelcomeView(){
@@ -124,7 +123,7 @@ bool WelcomeView::deactivate(){
 }
 
 TestView::TestView(EventController* controller)
-: myController(controller), screen(loadImage("screen.png"))
+: myController(controller), screen(loadImage("screenTest.png"))
 {
 }
 
@@ -139,16 +138,18 @@ bool TestView::activate(){
     SDL_GetWindowSize(window, &w, &h);
     for(int i=0; i<3; i++){
         InputBox* tBox = new InputBox;
-        tBox->position = SDL_Rect{w/8, i*h/8 + h/4, w/2, h/8};
-        tBox->box = loadImage("TextBox.png");
+        tBox->position = SDL_Rect{0, i*h/8 + h/8, 5*w/8, h/8};
+        tBox->box = loadImage("textBox.png");
+        tBox->font = TTF_OpenFont("Font.otf", h/12);
         myEvents.push_back(std::make_shared<InputEventProcessor>(myController, tBox));
         myEvents.push_back(std::make_shared<EditEventProcessor>(myController, tBox));
         myEvents.push_back(std::make_shared<InFDownEventProcessor>(myController, tBox));
         myEvents.push_back(std::make_shared<InKeyEventProcessor>(myController, tBox));
         tests.elements.push_back(tBox);
         tBox = new InputBox;
-        tBox->position = SDL_Rect{5*w/8, i*h/8 + h/4, w/4, h/8};
-        tBox->box = loadImage("TextBox.png");
+        tBox->position = SDL_Rect{5*w/8, i*h/8 + h/8, 3*w/8, h/8};
+        tBox->box = loadImage("textBox.png");
+        tBox->font = TTF_OpenFont("Font.otf", h/12);
         myEvents.push_back(std::make_shared<InputEventProcessor>(myController, tBox));
         myEvents.push_back(std::make_shared<EditEventProcessor>(myController, tBox));
         myEvents.push_back(std::make_shared<InFDownEventProcessor>(myController, tBox));
@@ -165,16 +166,18 @@ bool TestView::activate(){
 bool TestView::updateWorld(){
     if(!tests.elements.back()->text.empty()){
         InputBox* tBox = new InputBox;
-        tBox->position = SDL_Rect{w/8, tests.elements.size()*h/8 + h/4, w/2, h/8};
-        tBox->box = loadImage("TextBox.png");
+        tBox->position = SDL_Rect{0, tests.elements.size()*h/8 + h/4, 5*w/8, h/8};
+        tBox->box = loadImage("textBox.png");
+        tBox->font = TTF_OpenFont("Font.otf", h/12);
         myEvents.push_back(std::make_shared<InputEventProcessor>(myController, tBox));
         myEvents.push_back(std::make_shared<EditEventProcessor>(myController, tBox));
         myEvents.push_back(std::make_shared<InFDownEventProcessor>(myController, tBox));
         myEvents.push_back(std::make_shared<InKeyEventProcessor>(myController, tBox));
         tests.elements.push_back(tBox);
         tBox = new InputBox;
-        tBox->position = SDL_Rect{5*w/8, (tests.elements.size()/2)*h/8 + h/4, w/4, h/8};
-        tBox->box = loadImage("TextBox.png");
+        tBox->position = SDL_Rect{5*w/8, (tests.elements.size()/2)*h/8 + h/4, 3*w/8, h/8};
+        tBox->box = loadImage("textBox.png");
+        tBox->font = TTF_OpenFont("Font.otf", h/12);
         myEvents.push_back(std::make_shared<InputEventProcessor>(myController, tBox));
         myEvents.push_back(std::make_shared<EditEventProcessor>(myController, tBox));
         myEvents.push_back(std::make_shared<InFDownEventProcessor>(myController, tBox));

@@ -162,12 +162,13 @@ bool VList::moveElements(int aax, int aay){
     if (accel[1]) accel[1] -= vel[1]/4 + 2*accel[1]/3;
     accel[1] += aay;
     vel[1] += accel[1];
-    if(elements.size() <= 6) return false;
-    else if(elements[0]->position.y+ vel[1] > h/4 + h/32) vel[1] = h/4 + h/32 - elements[0]->position.y;
-    else if(elements[elements.size() - 1]->position.y + elements[elements.size() - 1]->position.h + vel[1] < h) vel[1] = h - elements[elements.size() - 1]->position.y - elements[elements.size() - 1]->position.h;
+    if(elements.size() <= 7) return false;
+    else if(elements[0]->position.y+ vel[1] > h/8) vel[1] = h/8 - elements[0]->position.y;
+    //else if(elements.back()->position.y + elements[elements.size() - 1]->position.h + vel[1] < h) vel[1] = h - elements[elements.size() - 1]->position.y - elements[elements.size() - 1]->position.h;
     elements[0]->position.y += vel[1];
-    for(int i=1; i<elements.size(); i++){
-        elements[i]->position.y = elements[i-1]->position.y + elements[i-1]->position.h;
+    elements[1]->position.y += vel[1];
+    for(int i=2; i<elements.size(); i++){
+        elements[i]->position.y = elements[i-2]->position.y + elements[i-2]->position.h;
     }
 
 }
@@ -180,14 +181,14 @@ bool VList::draw(){
     SDL_GetWindowSize(window, &w, &h);
     if(info.flags&SDL_RENDERER_TARGETTEXTURE){
         SDL_SetRenderTarget(renderer, tText);
-        SDL_SetRenderDrawColor(renderer, 0xD8, 0xD8, 0xD8, 0xFF);
+        SDL_SetRenderDrawColor(renderer, 0x1B, 0x51, 0x51, 0xFF);
         SDL_RenderFillRect(renderer,nullptr);
     }
     for(auto& e : elements)
         e->draw();
     if(info.flags&SDL_RENDERER_TARGETTEXTURE){
         SDL_SetRenderTarget(renderer, nullptr);
-        SDL_Rect tRect = {0, h/4 + h/32, w, 3*h/4};
+        SDL_Rect tRect = {0, h/8, w, 7*h/8};
         SDL_RenderCopy(renderer, tText, &tRect, &tRect);
     }
 }
