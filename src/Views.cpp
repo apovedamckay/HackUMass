@@ -240,10 +240,12 @@ SpecificationsView::~SpecificationsView(){
 bool SpecificationsView::activate(){
     subject.text = std::string("Final: ")+testsJson[place]["subject"].asString();
     for(auto& b: buttons) myEvents.push_back(std::make_shared<SelFDownEventProcesor>(myController, b));
+    if(testsJson.size() > place+1) views.push_back(std::make_shared<SpecificationsView>(myController, place+1));
     myEvents.push_back(std::make_shared<InputEventProcessor>(myController, &timeBox));
     myEvents.push_back(std::make_shared<EditEventProcessor>(myController, &timeBox));
     myEvents.push_back(std::make_shared<InFDownEventProcessor>(myController, &timeBox));
     myEvents.push_back(std::make_shared<InKeyEventProcessor>(myController, &timeBox));
+    myEvents.push_back(std::make_shared<SwipeDownEventProcesor>(myController, this));
     myEvents.push_back(std::make_shared<QuitKeyEventProcessor>(myController, this));
 }
 
@@ -256,19 +258,21 @@ bool SpecificationsView::updateWorld(){
 }
 
 SleepingView::SleepingView(EventController* controller)
-: myController(controller), screen(loadImage("sleepwithchecks.png")),unselected(loadImage("radioUnselected.png")),selected(loadImage("radioSelected.png"))
+: myController(controller), screen(loadImage("screenSleeping.png")),unselected(loadImage("radioUnselected.png")),selected(loadImage("radioSelected.png"))
 {
     int w,h;
     SDL_GetWindowSize(window,&w,&h);
         RadioButton tRButton;
         tRButton.radio = unselected;
-        tRButton.position = {4*w/5,3*h/10,w,4*h/10};
+        tRButton.position = {w/8,3*h/8,3*w/4,h/8};
+        tRButton.box = loadImage("insomnia.png");
         buttons.push_back(tRButton);
-        tRButton.position = {4*w/5,5*h/10,w,6*h/10};
+        tRButton.position = {w/8,4*h/8,3*w/4,h/8};
+        tRButton.box = loadImage("naps.png");
         buttons.push_back(tRButton);
-        tRButton.position = {4*w/5,7*h/10,w,8*h/10};
+        tRButton.position = {w/8,5*h/8,3*w/4,h/8};
+        tRButton.box = loadImage("daytime.png");
         buttons.push_back(tRButton);
-
 }
 
 SleepingView::~SleepingView(){
@@ -308,6 +312,9 @@ bool SpecificationsView::drawWorld(){
 }
 
 bool SpecificationsView::deactivate(){
+    testsJson[place]["computer"] = buttons[0]->selected;
+    testsJson[place]["library"] = buttons[0]->selected;
+    testsJson[place]["tutor"] = buttons[0]->selected ? timeBox.text : std::string();
 }
 
 bool SleepingView::drawWorld(){
@@ -321,4 +328,43 @@ bool SleepingView::drawWorld(){
 
 
 bool SleepingView::deactivate(){
+    insomnia = buttons[0].selected;
+    naps = buttons[1].selected;
+    daytime = buttons[2].selected;
+}
+
+WelcomeView::WelcomeView(EventController* controller)
+: myController(controller), screen(loadImage("screen.png"))
+{
+    int w, h;
+    SDL_GetWindowSize(window, &w, &h);
+}
+
+WelcomeView::~WelcomeView(){
+    SDL_DestroyTexture(screen);
+    SDL_DestroyTexture(meds.box);
+    SDL_DestroyTexture(tests.box);
+}
+
+bool WelcomeView::activate(){
+    myEvents.push_back(std::make_shared<QuitKeyEventProcessor>(myController, this));
+}
+
+bool WelcomeView::updateWorld(){
+    if(meds.selected){
+    //    views.push_back(std::make_shared<MedsView>(myController));
+    }
+    else if(tests.selected){
+        views.push_back(std::make_shared<TestView>(myController));
+    }
+
+    return !(meds.selected || tests.selected);
+}
+
+bool WelcomeView::drawWorld(){
+    SDL_RenderCopy(renderer, screen, nullptr, nullptr);
+    return !done;
+}
+
+bool WelcomeView::deactivate(){
 }

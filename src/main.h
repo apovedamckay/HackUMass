@@ -32,6 +32,9 @@ extern std::string dest;
 extern bool loading;
 extern Json::Value testsJson;
 extern std::string numDays;
+extern bool insomnia;
+extern bool naps;
+extern bool daytime;
 
 template <class T>
 struct callReturn{

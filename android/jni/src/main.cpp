@@ -43,6 +43,9 @@ int lastmove;
 bool loading=false;
 Json::Value testsJson;
 std::string numDays;
+bool insomnia;
+bool naps;
+bool daytime;
 
 size_t write_data(void *ptr, size_t size, size_t nmemb, void* stream){
     size_t written;
