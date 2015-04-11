@@ -4,8 +4,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
 <body>
 <tt>
-Build started on: <u>11-04-2015 at 11:19.57</u><br />
-Build ended on: <u>11-04-2015 at 11:20.29</u><p />
+Build started on: <u>11-04-2015 at 11:51.18</u><br />
+Build ended on: <u>11-04-2015 at 11:51.52</u><p />
 python3 compile.py android<br />
 Updated local.properties<br />
 Updated file /run/media/devon/Share/C++/HackUMass/android/proguard-project.txt<br />
@@ -142,9 +142,16 @@ jni/src/Views.cpp: In member function 'virtual bool SpecificationsView::activate
 <font color="#0000ff">jni/src/Views.cpp:243:1: warning: no return statement in function returning non-void [-Wreturn-type]</font><br />
  }<br />
  ^<br />
-jni/src/Views.cpp: In member function 'virtual bool SpecificationsView::deactivate()':<br />
-<font color="#0000ff">jni/src/Views.cpp:264:1: warning: no return statement in function returning non-void [-Wreturn-type]</font><br />
- }<br />
+In file included from jni/src/Views.cpp:5:0:<br />
+jni/src/Views.h: In constructor 'SleepingView::SleepingView(EventController*)':<br />
+<font color="#0000ff">jni/src/Views.h:83:18: warning: 'SleepingView::unselected' will be initialized after [-Wreorder]</font><br />
+     SDL_Texture* unselected;<br />
+                  ^<br />
+<font color="#0000ff">jni/src/Views.h:82:18: warning:   'SDL_Texture* SleepingView::selected' [-Wreorder]</font><br />
+     SDL_Texture* selected;<br />
+                  ^<br />
+<font color="#0000ff">jni/src/Views.cpp:253:1: warning:   when initialized here [-Wreorder]</font><br />
+ SleepingView::SleepingView(EventController* controller)<br />
  ^<br />
 jni/src/Views.cpp: In member function 'virtual bool TestView::activate()':<br />
 <font color="#0000ff">jni/src/Views.cpp:165:1: warning: no return statement in function returning non-void [-Wreturn-type]</font><br />
@@ -161,12 +168,57 @@ jni/src/Views.cpp: In member function 'virtual bool TestView::deactivate()':<br 
 <font color="#0000ff">jni/src/Views.cpp:199:1: warning: no return statement in function returning non-void [-Wreturn-type]</font><br />
  }<br />
  ^<br />
+jni/src/Views.cpp: In member function 'virtual bool SleepingView::activate()':<br />
+<font color="#0000ff">jni/src/Views.cpp:281:1: warning: no return statement in function returning non-void [-Wreturn-type]</font><br />
+ }<br />
+ ^<br />
+jni/src/Views.cpp: In member function 'virtual bool SleepingView::updateWorld()':<br />
+<font color="#0000ff">jni/src/Views.cpp:285:35: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]</font><br />
+     for(int i = 0; i&lt;buttons.size();i++){<br />
+                                   ^<br />
+<font color="#0000ff">jni/src/Views.cpp:284:10: warning: unused variable 'sel' [-Wunused-variable]</font><br />
+     bool sel = false;<br />
+          ^<br />
+jni/src/Views.cpp: In member function 'virtual bool SpecificationsView::deactivate()':<br />
+<font color="#0000ff">jni/src/Views.cpp:306:1: warning: no return statement in function returning non-void [-Wreturn-type]</font><br />
+ }<br />
+ ^<br />
+jni/src/Views.cpp: In member function 'virtual bool SleepingView::deactivate()':<br />
+<font color="#0000ff">jni/src/Views.cpp:319:1: warning: no return statement in function returning non-void [-Wreturn-type]</font><br />
+ }<br />
+ ^<br />
 jni/src/Views.cpp: In member function 'virtual bool SpecificationsView::activate()':<br />
 <font color="#0000ff">jni/src/Views.cpp:243:1: warning: no return statement in function returning non-void [-Wreturn-type]</font><br />
  }<br />
  ^<br />
+In file included from jni/src/Views.cpp:5:0:<br />
+jni/src/Views.h: In constructor 'SleepingView::SleepingView(EventController*)':<br />
+<font color="#0000ff">jni/src/Views.h:83:18: warning: 'SleepingView::unselected' will be initialized after [-Wreorder]</font><br />
+     SDL_Texture* unselected;<br />
+                  ^<br />
+<font color="#0000ff">jni/src/Views.h:82:18: warning:   'SDL_Texture* SleepingView::selected' [-Wreorder]</font><br />
+     SDL_Texture* selected;<br />
+                  ^<br />
+<font color="#0000ff">jni/src/Views.cpp:253:1: warning:   when initialized here [-Wreorder]</font><br />
+ SleepingView::SleepingView(EventController* controller)<br />
+ ^<br />
+jni/src/Views.cpp: In member function 'virtual bool SleepingView::activate()':<br />
+<font color="#0000ff">jni/src/Views.cpp:281:1: warning: no return statement in function returning non-void [-Wreturn-type]</font><br />
+ }<br />
+ ^<br />
+jni/src/Views.cpp: In member function 'virtual bool SleepingView::updateWorld()':<br />
+<font color="#0000ff">jni/src/Views.cpp:285:35: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]</font><br />
+     for(int i = 0; i&lt;buttons.size();i++){<br />
+                                   ^<br />
+<font color="#0000ff">jni/src/Views.cpp:284:10: warning: unused variable 'sel' [-Wunused-variable]</font><br />
+     bool sel = false;<br />
+          ^<br />
 jni/src/Views.cpp: In member function 'virtual bool SpecificationsView::deactivate()':<br />
-<font color="#0000ff">jni/src/Views.cpp:264:1: warning: no return statement in function returning non-void [-Wreturn-type]</font><br />
+<font color="#0000ff">jni/src/Views.cpp:306:1: warning: no return statement in function returning non-void [-Wreturn-type]</font><br />
+ }<br />
+ ^<br />
+jni/src/Views.cpp: In member function 'virtual bool SleepingView::deactivate()':<br />
+<font color="#0000ff">jni/src/Views.cpp:319:1: warning: no return statement in function returning non-void [-Wreturn-type]</font><br />
  }<br />
  ^<br />
 In file included from jni/src/Views.cpp:6:0:<br />
@@ -181,8 +233,8 @@ jni/src/Events.h: In member function 'virtual bool QuitKeyEventProcessor::proces
   ^<br />
 [armeabi] SharedLibrary  : libmain.so<br />
 [armeabi-v7a] SharedLibrary  : libmain.so<br />
-[armeabi] Install        : libmain.so =&gt; libs/armeabi/libmain.so<br />
 [armeabi-v7a] Install        : libmain.so =&gt; libs/armeabi-v7a/libmain.so<br />
+[armeabi] Install        : libmain.so =&gt; libs/armeabi/libmain.so<br />
 Buildfile: /run/media/devon/Share/C++/HackUMass/android/build.xml<br />
 -set-mode-check:<br />
 -set-debug-files:<br />
@@ -326,7 +378,7 @@ debug:<br />
 debug:<br />
 install:<br />
      [echo] Installing /run/media/devon/Share/C++/HackUMass/android/bin/SDLActivity-debug.apk onto default emulator or device...<br />
-     [exec] 5826 KB/s (4901768 bytes in 0.821s)<br />
+     [exec] 6195 KB/s (4916109 bytes in 0.774s)<br />
      [exec] 	pkg: /data/local/tmp/SDLActivity-debug.apk<br />
      [exec] Success<br />
 BUILD SUCCESSFUL<br />
@@ -334,8 +386,8 @@ Total time: 19 seconds<br />
 <b>-------------- Build: Android in Framework (compiler: GNU GCC Compiler)---------------</b><br />
 g++ -Wall -g -std=c++0x  -I/run/media/devon/Share/C++/HackUMass/android/src/com/myapp/game -I/run/media/devon/Share/C++/HackUMass/ -c /run/media/devon/Share/C++/HackUMass/android/src/com/myapp/game/MyGame.java -o obj/Debug/android/src/com/myapp/game/MyGame.o<br />
 no classpath specified<br />
-<font color="#a00000">Process terminated with status 1 (0 minute(s), 32 second(s))</font><br />
-<font color="#a00000">0 error(s), 36 warning(s) (0 minute(s), 32 second(s))</font><br />
+<font color="#a00000">Process terminated with status 1 (0 minute(s), 33 second(s))</font><br />
+<font color="#a00000">0 error(s), 50 warning(s) (0 minute(s), 33 second(s))</font><br />
 </tt>
 </body>
 </html>
