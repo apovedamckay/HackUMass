@@ -158,7 +158,7 @@ bool TestView::activate(){
     }
 
     //views.push_back(std::make_shared<RankView>(myController));
-    views.push_back(std::make_shared<SpecificationsView>(myController, 0));
+    views.push_back(std::make_shared<SleepingView>(myController));
     myEvents.push_back(std::make_shared<FVMotionEventProcessor>(myController, &tests));
     myEvents.push_back(std::make_shared<SwipeDownEventProcesor>(myController, this));
     myEvents.push_back(std::make_shared<QuitKeyEventProcessor>(myController, this));
@@ -255,6 +255,48 @@ bool SpecificationsView::updateWorld(){
     return !done;
 }
 
+SleepingView::SleepingView(EventController* controller)
+: myController(controller), screen(loadImage("sleepwithchecks.png")),unselected(loadImage("radioUnselected.png")),selected(loadImage("radioSelected.png"))
+{
+    int w,h;
+    SDL_GetWindowSize(window,&w,&h);
+        RadioButton tRButton;
+        tRButton.radio = unselected;
+        tRButton.position = {4*w/5,3*h/10,w,4*h/10};
+        buttons.push_back(tRButton);
+        tRButton.position = {4*w/5,5*h/10,w,6*h/10};
+        buttons.push_back(tRButton);
+        tRButton.position = {4*w/5,7*h/10,w,8*h/10};
+        buttons.push_back(tRButton);
+
+}
+
+SleepingView::~SleepingView(){
+    SDL_DestroyTexture(screen);
+    SDL_DestroyTexture(selected);
+    SDL_DestroyTexture(unselected);
+}
+
+bool SleepingView::activate(){
+    views.push_back(std::make_shared<SpecificationsView>(myController,0));
+    myEvents.push_back(std::make_shared<QuitKeyEventProcessor>(myController, this));
+    for(auto& r : buttons) myEvents.push_back(std::make_shared<SelFDownEventProcesor>(myController, &r));
+    myEvents.push_back(std::make_shared<SwipeDownEventProcesor>(myController, this));
+
+}
+
+bool SleepingView::updateWorld(){
+    bool sel = false;
+    for(int i = 0; i<buttons.size();i++){
+        if(buttons[i].selected){
+            buttons[i].radio = selected;
+        }else{
+            buttons[i].radio = unselected;
+        }
+    }
+    return !done;
+}
+
 bool SpecificationsView::drawWorld(){
     SDL_RenderCopy(renderer, screen, nullptr, nullptr);
     for(auto& b : buttons){
@@ -266,4 +308,17 @@ bool SpecificationsView::drawWorld(){
 }
 
 bool SpecificationsView::deactivate(){
+}
+
+bool SleepingView::drawWorld(){
+    SDL_RenderCopy(renderer,screen,nullptr,nullptr);
+    for(auto& r : buttons){
+        r.draw();
+    }
+    return !done;
+}
+
+
+
+bool SleepingView::deactivate(){
 }

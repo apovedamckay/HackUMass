@@ -79,6 +79,9 @@ class SleepingView : public View{
 protected:
     EventController* myController;
     SDL_Texture* screen;
+    SDL_Texture* selected;
+    SDL_Texture* unselected;
+    std::vector<RadioButton> buttons;
 
 public:
     SleepingView(EventController* controller);
