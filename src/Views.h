@@ -109,9 +109,15 @@ class SpecificationsView : public View{
 protected:
     EventController* myController;
     SDL_Texture* screen;
+    SelectionBox subject;
+    std::vector<RadioButton*> buttons;
+    InputBox timeBox;
+    int place;
+    SDL_Texture* selected;
+    SDL_Texture* unselected;
 
 public:
-    SpecificationsView(EventController* controller);
+    SpecificationsView(EventController* controller, int _place);
     ~SpecificationsView();
 
     bool activate();

@@ -4,8 +4,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
 <body>
 <tt>
-Build started on: <u>11-04-2015 at 10:17.41</u><br />
-Build ended on: <u>11-04-2015 at 10:18.13</u><p />
+Build started on: <u>11-04-2015 at 11:19.57</u><br />
+Build ended on: <u>11-04-2015 at 11:20.29</u><p />
 python3 compile.py android<br />
 Updated local.properties<br />
 Updated file /run/media/devon/Share/C++/HackUMass/android/proguard-project.txt<br />
@@ -21,134 +21,6 @@ Android NDK:     or LOCAL_SHARED_LIBRARIES instead to list the library dependenc
 Android NDK:     current module    <br />
 [armeabi] Compile++ thumb: main &lt;= Views.cpp<br />
 [armeabi-v7a] Compile++ thumb: main &lt;= Views.cpp<br />
-In file included from jni/src/Views.h:7:0,<br />
-                 from jni/src/Views.cpp:5:<br />
-jni/src/GUI.h: In constructor 'SelectionBox::SelectionBox()':<br />
-<font color="#0000ff">jni/src/GUI.h:62:18: warning: 'SelectionBox::box' will be initialized after [-Wreorder]</font><br />
-     SDL_Texture *box;<br />
-                  ^<br />
-<font color="#0000ff">jni/src/GUI.h:61:20: warning:   'bool SelectionBox::drawBox' [-Wreorder]</font><br />
-     bool selected, drawBox, centered, right;<br />
-                    ^<br />
-<font color="#0000ff">jni/src/GUI.h:65:5: warning:   when initialized here [-Wreorder]</font><br />
-     SelectionBox()<br />
-     ^<br />
-In file included from jni/src/Views.h:7:0,<br />
-                 from jni/src/Views.cpp:5:<br />
-jni/src/GUI.h: In constructor 'SelectionBox::SelectionBox()':<br />
-<font color="#0000ff">jni/src/GUI.h:62:18: warning: 'SelectionBox::box' will be initialized after [-Wreorder]</font><br />
-     SDL_Texture *box;<br />
-                  ^<br />
-<font color="#0000ff">jni/src/GUI.h:61:20: warning:   'bool SelectionBox::drawBox' [-Wreorder]</font><br />
-     bool selected, drawBox, centered, right;<br />
-                    ^<br />
-<font color="#0000ff">jni/src/GUI.h:65:5: warning:   when initialized here [-Wreorder]</font><br />
-     SelectionBox()<br />
-     ^<br />
-jni/src/GUI.h: In destructor 'virtual HList::~HList()':<br />
-<font color="#0000ff">jni/src/GUI.h:129:40: warning: deleting object of polymorphic class type 'InputBox' which has non-virtual destructor might cause undefined behaviour [-Wdelete-non-virtual-dtor]</font><br />
-         for(auto&amp; s : elements) delete s;<br />
-                                        ^<br />
-In file included from jni/src/Views.cpp:6:0:<br />
-jni/src/Events.h: At global scope:<br />
-<font color="#0000ff">jni/src/Events.h:32:15: warning: unused parameter 'event' [-Wunused-parameter]</font><br />
-  virtual bool process(SDL_Event &amp;event) { return myView-&gt;done = true;}<br />
-               ^<br />
-jni/src/GUI.h: In destructor 'virtual HList::~HList()':<br />
-<font color="#0000ff">jni/src/GUI.h:129:40: warning: deleting object of polymorphic class type 'InputBox' which has non-virtual destructor might cause undefined behaviour [-Wdelete-non-virtual-dtor]</font><br />
-         for(auto&amp; s : elements) delete s;<br />
-                                        ^<br />
-In file included from jni/src/Views.cpp:6:0:<br />
-jni/src/Events.h: At global scope:<br />
-<font color="#0000ff">jni/src/Events.h:32:15: warning: unused parameter 'event' [-Wunused-parameter]</font><br />
-  virtual bool process(SDL_Event &amp;event) { return myView-&gt;done = true;}<br />
-               ^<br />
-<font color="#0000ff">jni/src/Views.cpp:45:1: warning: unused parameter 'controller' [-Wunused-parameter]</font><br />
- LoadingView::LoadingView(EventController* controller)<br />
- ^<br />
-jni/src/Views.cpp: In member function 'virtual bool LoadingView::activate()':<br />
-<font color="#0000ff">jni/src/Views.cpp:57:1: warning: no return statement in function returning non-void [-Wreturn-type]</font><br />
- }<br />
- ^<br />
-jni/src/Views.cpp: In member function 'virtual bool LoadingView::deactivate()':<br />
-<font color="#0000ff">jni/src/Views.cpp:61:1: warning: no return statement in function returning non-void [-Wreturn-type]</font><br />
- }<br />
- ^<br />
-jni/src/Views.cpp: In member function 'virtual bool LoadingView::updateWorld()':<br />
-<font color="#0000ff">jni/src/Views.cpp:77:30: warning: operation on 'counting' may be undefined [-Wsequence-point]</font><br />
-     counting = ++counting % 5;<br />
-                              ^<br />
-<font color="#0000ff">jni/src/Views.cpp:45:1: warning: unused parameter 'controller' [-Wunused-parameter]</font><br />
- LoadingView::LoadingView(EventController* controller)<br />
- ^<br />
-jni/src/Views.cpp: In member function 'virtual bool LoadingView::activate()':<br />
-<font color="#0000ff">jni/src/Views.cpp:57:1: warning: no return statement in function returning non-void [-Wreturn-type]</font><br />
- }<br />
- ^<br />
-jni/src/Views.cpp: In member function 'virtual bool LoadingView::deactivate()':<br />
-<font color="#0000ff">jni/src/Views.cpp:61:1: warning: no return statement in function returning non-void [-Wreturn-type]</font><br />
- }<br />
- ^<br />
-jni/src/Views.cpp: In member function 'virtual bool LoadingView::updateWorld()':<br />
-<font color="#0000ff">jni/src/Views.cpp:77:30: warning: operation on 'counting' may be undefined [-Wsequence-point]</font><br />
-     counting = ++counting % 5;<br />
-                              ^<br />
-jni/src/Views.cpp: In member function 'virtual bool WelcomeView::activate()':<br />
-<font color="#0000ff">jni/src/Views.cpp:102:1: warning: no return statement in function returning non-void [-Wreturn-type]</font><br />
- }<br />
- ^<br />
-jni/src/Views.cpp: In member function 'virtual bool WelcomeView::activate()':<br />
-<font color="#0000ff">jni/src/Views.cpp:102:1: warning: no return statement in function returning non-void [-Wreturn-type]</font><br />
- }<br />
- ^<br />
-jni/src/Views.cpp: In member function 'virtual bool WelcomeView::deactivate()':<br />
-<font color="#0000ff">jni/src/Views.cpp:123:1: warning: no return statement in function returning non-void [-Wreturn-type]</font><br />
- }<br />
- ^<br />
-jni/src/Views.cpp: In member function 'virtual bool WelcomeView::deactivate()':<br />
-<font color="#0000ff">jni/src/Views.cpp:123:1: warning: no return statement in function returning non-void [-Wreturn-type]</font><br />
- }<br />
- ^<br />
-jni/src/Views.cpp: In member function 'virtual bool TestView::activate()':<br />
-<font color="#0000ff">jni/src/Views.cpp:164:1: warning: no return statement in function returning non-void [-Wreturn-type]</font><br />
- }<br />
- ^<br />
-jni/src/Views.cpp: In member function 'virtual bool TestView::updateWorld()':<br />
-<font color="#0000ff">jni/src/Views.cpp:169:64: warning: narrowing conversion of '(((((TestView*)this)-&gt;TestView::tests.VList::&lt;anonymous&gt;.HList::elements.std::vector&lt;_Tp, _Alloc&gt;::size&lt;InputBox*, std::allocator&lt;InputBox*&gt; &gt;() * ((std::vector&lt;InputBox*&gt;::size_type)((TestView*)this)-&gt;TestView::h)) / 8u) + ((std::vector&lt;InputBox*&gt;::size_type)(((TestView*)this)-&gt;TestView::h / 4)))' from 'std::vector&lt;InputBox*&gt;::size_type {aka unsigned int}' to 'int' inside { } [-Wnarrowing]</font><br />
-         tBox-&gt;position = SDL_Rect{0, tests.elements.size()*h/8 + h/4, 5*w/8, h/8};<br />
-                                                                ^<br />
-<font color="#0000ff">jni/src/Views.cpp:178:72: warning: narrowing conversion of '((((((TestView*)this)-&gt;TestView::tests.VList::&lt;anonymous&gt;.HList::elements.std::vector&lt;_Tp, _Alloc&gt;::size&lt;InputBox*, std::allocator&lt;InputBox*&gt; &gt;() / 2u) * ((std::vector&lt;InputBox*&gt;::size_type)((TestView*)this)-&gt;TestView::h)) / 8u) + ((std::vector&lt;InputBox*&gt;::size_type)(((TestView*)this)-&gt;TestView::h / 4)))' from 'std::vector&lt;InputBox*&gt;::size_type {aka unsigned int}' to 'int' inside { } [-Wnarrowing]</font><br />
-         tBox-&gt;position = SDL_Rect{5*w/8, (tests.elements.size()/2)*h/8 + h/4, 3*w/8, h/8};<br />
-                                                                        ^<br />
-jni/src/Views.cpp: In member function 'virtual bool TestView::deactivate()':<br />
-<font color="#0000ff">jni/src/Views.cpp:198:1: warning: no return statement in function returning non-void [-Wreturn-type]</font><br />
- }<br />
- ^<br />
-jni/src/Views.cpp: In member function 'virtual bool TestView::activate()':<br />
-<font color="#0000ff">jni/src/Views.cpp:164:1: warning: no return statement in function returning non-void [-Wreturn-type]</font><br />
- }<br />
- ^<br />
-jni/src/Views.cpp: In member function 'virtual bool TestView::updateWorld()':<br />
-<font color="#0000ff">jni/src/Views.cpp:169:64: warning: narrowing conversion of '(((((TestView*)this)-&gt;TestView::tests.VList::&lt;anonymous&gt;.HList::elements.std::vector&lt;_Tp, _Alloc&gt;::size&lt;InputBox*, std::allocator&lt;InputBox*&gt; &gt;() * ((std::vector&lt;InputBox*&gt;::size_type)((TestView*)this)-&gt;TestView::h)) / 8u) + ((std::vector&lt;InputBox*&gt;::size_type)(((TestView*)this)-&gt;TestView::h / 4)))' from 'std::vector&lt;InputBox*&gt;::size_type {aka unsigned int}' to 'int' inside { } [-Wnarrowing]</font><br />
-         tBox-&gt;position = SDL_Rect{0, tests.elements.size()*h/8 + h/4, 5*w/8, h/8};<br />
-                                                                ^<br />
-<font color="#0000ff">jni/src/Views.cpp:178:72: warning: narrowing conversion of '((((((TestView*)this)-&gt;TestView::tests.VList::&lt;anonymous&gt;.HList::elements.std::vector&lt;_Tp, _Alloc&gt;::size&lt;InputBox*, std::allocator&lt;InputBox*&gt; &gt;() / 2u) * ((std::vector&lt;InputBox*&gt;::size_type)((TestView*)this)-&gt;TestView::h)) / 8u) + ((std::vector&lt;InputBox*&gt;::size_type)(((TestView*)this)-&gt;TestView::h / 4)))' from 'std::vector&lt;InputBox*&gt;::size_type {aka unsigned int}' to 'int' inside { } [-Wnarrowing]</font><br />
-         tBox-&gt;position = SDL_Rect{5*w/8, (tests.elements.size()/2)*h/8 + h/4, 3*w/8, h/8};<br />
-                                                                        ^<br />
-jni/src/Views.cpp: In member function 'virtual bool TestView::deactivate()':<br />
-<font color="#0000ff">jni/src/Views.cpp:198:1: warning: no return statement in function returning non-void [-Wreturn-type]</font><br />
- }<br />
- ^<br />
-In file included from jni/src/Views.cpp:6:0:<br />
-jni/src/Events.h: In member function 'virtual bool QuitKeyEventProcessor::process(SDL_Event&amp;)':<br />
-<font color="#0000ff">jni/src/Events.h:21:2: warning: control reaches end of non-void function [-Wreturn-type]</font><br />
-  }<br />
-  ^<br />
-In file included from jni/src/Views.cpp:6:0:<br />
-jni/src/Events.h: In member function 'virtual bool QuitKeyEventProcessor::process(SDL_Event&amp;)':<br />
-<font color="#0000ff">jni/src/Events.h:21:2: warning: control reaches end of non-void function [-Wreturn-type]</font><br />
-  }<br />
-  ^<br />
 [armeabi] Gdbserver      : [arm-linux-androideabi-4.8] libs/armeabi/gdbserver<br />
 [armeabi] Gdbsetup       : libs/armeabi/gdb.setup<br />
 [armeabi-v7a] Gdbserver      : [arm-linux-androideabi-4.8] libs/armeabi-v7a/gdbserver<br />
@@ -158,12 +30,156 @@ jni/src/Events.h: In member function 'virtual bool QuitKeyEventProcessor::proces
 [armeabi] Install        : libSDL2_mixer.so =&gt; libs/armeabi/libSDL2_mixer.so<br />
 [armeabi] Install        : libSDL2_net.so =&gt; libs/armeabi/libSDL2_net.so<br />
 [armeabi] Install        : libSDL2_ttf.so =&gt; libs/armeabi/libSDL2_ttf.so<br />
-[armeabi] SharedLibrary  : libmain.so<br />
 [armeabi-v7a] Install        : libSDL2.so =&gt; libs/armeabi-v7a/libSDL2.so<br />
 [armeabi-v7a] Install        : libSDL2_image.so =&gt; libs/armeabi-v7a/libSDL2_image.so<br />
 [armeabi-v7a] Install        : libSDL2_mixer.so =&gt; libs/armeabi-v7a/libSDL2_mixer.so<br />
 [armeabi-v7a] Install        : libSDL2_net.so =&gt; libs/armeabi-v7a/libSDL2_net.so<br />
 [armeabi-v7a] Install        : libSDL2_ttf.so =&gt; libs/armeabi-v7a/libSDL2_ttf.so<br />
+In file included from jni/src/Views.h:7:0,<br />
+                 from jni/src/Views.cpp:5:<br />
+jni/src/GUI.h: In constructor 'SelectionBox::SelectionBox()':<br />
+<font color="#0000ff">jni/src/GUI.h:62:18: warning: 'SelectionBox::box' will be initialized after [-Wreorder]</font><br />
+     SDL_Texture *box;<br />
+                  ^<br />
+<font color="#0000ff">jni/src/GUI.h:61:20: warning:   'bool SelectionBox::drawBox' [-Wreorder]</font><br />
+     bool selected, drawBox, centered, right;<br />
+                    ^<br />
+<font color="#0000ff">jni/src/GUI.h:65:5: warning:   when initialized here [-Wreorder]</font><br />
+     SelectionBox()<br />
+     ^<br />
+jni/src/GUI.h: In destructor 'virtual HList::~HList()':<br />
+<font color="#0000ff">jni/src/GUI.h:109:40: warning: deleting object of polymorphic class type 'InputBox' which has non-virtual destructor might cause undefined behaviour [-Wdelete-non-virtual-dtor]</font><br />
+         for(auto&amp; s : elements) delete s;<br />
+                                        ^<br />
+In file included from jni/src/Views.h:7:0,<br />
+                 from jni/src/Views.cpp:5:<br />
+jni/src/GUI.h: In constructor 'SelectionBox::SelectionBox()':<br />
+<font color="#0000ff">jni/src/GUI.h:62:18: warning: 'SelectionBox::box' will be initialized after [-Wreorder]</font><br />
+     SDL_Texture *box;<br />
+                  ^<br />
+<font color="#0000ff">jni/src/GUI.h:61:20: warning:   'bool SelectionBox::drawBox' [-Wreorder]</font><br />
+     bool selected, drawBox, centered, right;<br />
+                    ^<br />
+<font color="#0000ff">jni/src/GUI.h:65:5: warning:   when initialized here [-Wreorder]</font><br />
+     SelectionBox()<br />
+     ^<br />
+jni/src/GUI.h: In destructor 'virtual HList::~HList()':<br />
+<font color="#0000ff">jni/src/GUI.h:109:40: warning: deleting object of polymorphic class type 'InputBox' which has non-virtual destructor might cause undefined behaviour [-Wdelete-non-virtual-dtor]</font><br />
+         for(auto&amp; s : elements) delete s;<br />
+                                        ^<br />
+In file included from jni/src/Views.cpp:6:0:<br />
+jni/src/Events.h: At global scope:<br />
+<font color="#0000ff">jni/src/Events.h:32:15: warning: unused parameter 'event' [-Wunused-parameter]</font><br />
+  virtual bool process(SDL_Event &amp;event) { return myView-&gt;done = true;}<br />
+               ^<br />
+<font color="#0000ff">jni/src/Views.cpp:45:1: warning: unused parameter 'controller' [-Wunused-parameter]</font><br />
+ LoadingView::LoadingView(EventController* controller)<br />
+ ^<br />
+jni/src/Views.cpp: In member function 'virtual bool LoadingView::activate()':<br />
+<font color="#0000ff">jni/src/Views.cpp:57:1: warning: no return statement in function returning non-void [-Wreturn-type]</font><br />
+ }<br />
+ ^<br />
+jni/src/Views.cpp: In member function 'virtual bool LoadingView::deactivate()':<br />
+<font color="#0000ff">jni/src/Views.cpp:61:1: warning: no return statement in function returning non-void [-Wreturn-type]</font><br />
+ }<br />
+ ^<br />
+jni/src/Views.cpp: In member function 'virtual bool LoadingView::updateWorld()':<br />
+<font color="#0000ff">jni/src/Views.cpp:77:30: warning: operation on 'counting' may be undefined [-Wsequence-point]</font><br />
+     counting = ++counting % 5;<br />
+                              ^<br />
+In file included from jni/src/Views.cpp:6:0:<br />
+jni/src/Events.h: At global scope:<br />
+<font color="#0000ff">jni/src/Events.h:32:15: warning: unused parameter 'event' [-Wunused-parameter]</font><br />
+  virtual bool process(SDL_Event &amp;event) { return myView-&gt;done = true;}<br />
+               ^<br />
+<font color="#0000ff">jni/src/Views.cpp:45:1: warning: unused parameter 'controller' [-Wunused-parameter]</font><br />
+ LoadingView::LoadingView(EventController* controller)<br />
+ ^<br />
+jni/src/Views.cpp: In member function 'virtual bool LoadingView::activate()':<br />
+<font color="#0000ff">jni/src/Views.cpp:57:1: warning: no return statement in function returning non-void [-Wreturn-type]</font><br />
+ }<br />
+ ^<br />
+jni/src/Views.cpp: In member function 'virtual bool LoadingView::deactivate()':<br />
+<font color="#0000ff">jni/src/Views.cpp:61:1: warning: no return statement in function returning non-void [-Wreturn-type]</font><br />
+ }<br />
+ ^<br />
+jni/src/Views.cpp: In member function 'virtual bool LoadingView::updateWorld()':<br />
+<font color="#0000ff">jni/src/Views.cpp:77:30: warning: operation on 'counting' may be undefined [-Wsequence-point]</font><br />
+     counting = ++counting % 5;<br />
+                              ^<br />
+jni/src/Views.cpp: In member function 'virtual bool WelcomeView::activate()':<br />
+<font color="#0000ff">jni/src/Views.cpp:102:1: warning: no return statement in function returning non-void [-Wreturn-type]</font><br />
+ }<br />
+ ^<br />
+jni/src/Views.cpp: In member function 'virtual bool WelcomeView::activate()':<br />
+<font color="#0000ff">jni/src/Views.cpp:102:1: warning: no return statement in function returning non-void [-Wreturn-type]</font><br />
+ }<br />
+ ^<br />
+jni/src/Views.cpp: In member function 'virtual bool WelcomeView::deactivate()':<br />
+<font color="#0000ff">jni/src/Views.cpp:123:1: warning: no return statement in function returning non-void [-Wreturn-type]</font><br />
+ }<br />
+ ^<br />
+jni/src/Views.cpp: In member function 'virtual bool WelcomeView::deactivate()':<br />
+<font color="#0000ff">jni/src/Views.cpp:123:1: warning: no return statement in function returning non-void [-Wreturn-type]</font><br />
+ }<br />
+ ^<br />
+jni/src/Views.cpp: In member function 'virtual bool TestView::activate()':<br />
+<font color="#0000ff">jni/src/Views.cpp:165:1: warning: no return statement in function returning non-void [-Wreturn-type]</font><br />
+ }<br />
+ ^<br />
+jni/src/Views.cpp: In member function 'virtual bool TestView::updateWorld()':<br />
+<font color="#0000ff">jni/src/Views.cpp:170:64: warning: narrowing conversion of '(((((TestView*)this)-&gt;TestView::tests.VList::&lt;anonymous&gt;.HList::elements.std::vector&lt;_Tp, _Alloc&gt;::size&lt;InputBox*, std::allocator&lt;InputBox*&gt; &gt;() * ((std::vector&lt;InputBox*&gt;::size_type)((TestView*)this)-&gt;TestView::h)) / 8u) + ((std::vector&lt;InputBox*&gt;::size_type)(((TestView*)this)-&gt;TestView::h / 4)))' from 'std::vector&lt;InputBox*&gt;::size_type {aka unsigned int}' to 'int' inside { } [-Wnarrowing]</font><br />
+         tBox-&gt;position = SDL_Rect{0, tests.elements.size()*h/8 + h/4, 5*w/8, h/8};<br />
+                                                                ^<br />
+<font color="#0000ff">jni/src/Views.cpp:179:72: warning: narrowing conversion of '((((((TestView*)this)-&gt;TestView::tests.VList::&lt;anonymous&gt;.HList::elements.std::vector&lt;_Tp, _Alloc&gt;::size&lt;InputBox*, std::allocator&lt;InputBox*&gt; &gt;() / 2u) * ((std::vector&lt;InputBox*&gt;::size_type)((TestView*)this)-&gt;TestView::h)) / 8u) + ((std::vector&lt;InputBox*&gt;::size_type)(((TestView*)this)-&gt;TestView::h / 4)))' from 'std::vector&lt;InputBox*&gt;::size_type {aka unsigned int}' to 'int' inside { } [-Wnarrowing]</font><br />
+         tBox-&gt;position = SDL_Rect{5*w/8, (tests.elements.size()/2)*h/8 + h/4, 3*w/8, h/8};<br />
+                                                                        ^<br />
+jni/src/Views.cpp: In member function 'virtual bool TestView::deactivate()':<br />
+<font color="#0000ff">jni/src/Views.cpp:199:1: warning: no return statement in function returning non-void [-Wreturn-type]</font><br />
+ }<br />
+ ^<br />
+jni/src/Views.cpp: In member function 'virtual bool SpecificationsView::activate()':<br />
+<font color="#0000ff">jni/src/Views.cpp:243:1: warning: no return statement in function returning non-void [-Wreturn-type]</font><br />
+ }<br />
+ ^<br />
+jni/src/Views.cpp: In member function 'virtual bool SpecificationsView::deactivate()':<br />
+<font color="#0000ff">jni/src/Views.cpp:264:1: warning: no return statement in function returning non-void [-Wreturn-type]</font><br />
+ }<br />
+ ^<br />
+jni/src/Views.cpp: In member function 'virtual bool TestView::activate()':<br />
+<font color="#0000ff">jni/src/Views.cpp:165:1: warning: no return statement in function returning non-void [-Wreturn-type]</font><br />
+ }<br />
+ ^<br />
+jni/src/Views.cpp: In member function 'virtual bool TestView::updateWorld()':<br />
+<font color="#0000ff">jni/src/Views.cpp:170:64: warning: narrowing conversion of '(((((TestView*)this)-&gt;TestView::tests.VList::&lt;anonymous&gt;.HList::elements.std::vector&lt;_Tp, _Alloc&gt;::size&lt;InputBox*, std::allocator&lt;InputBox*&gt; &gt;() * ((std::vector&lt;InputBox*&gt;::size_type)((TestView*)this)-&gt;TestView::h)) / 8u) + ((std::vector&lt;InputBox*&gt;::size_type)(((TestView*)this)-&gt;TestView::h / 4)))' from 'std::vector&lt;InputBox*&gt;::size_type {aka unsigned int}' to 'int' inside { } [-Wnarrowing]</font><br />
+         tBox-&gt;position = SDL_Rect{0, tests.elements.size()*h/8 + h/4, 5*w/8, h/8};<br />
+                                                                ^<br />
+<font color="#0000ff">jni/src/Views.cpp:179:72: warning: narrowing conversion of '((((((TestView*)this)-&gt;TestView::tests.VList::&lt;anonymous&gt;.HList::elements.std::vector&lt;_Tp, _Alloc&gt;::size&lt;InputBox*, std::allocator&lt;InputBox*&gt; &gt;() / 2u) * ((std::vector&lt;InputBox*&gt;::size_type)((TestView*)this)-&gt;TestView::h)) / 8u) + ((std::vector&lt;InputBox*&gt;::size_type)(((TestView*)this)-&gt;TestView::h / 4)))' from 'std::vector&lt;InputBox*&gt;::size_type {aka unsigned int}' to 'int' inside { } [-Wnarrowing]</font><br />
+         tBox-&gt;position = SDL_Rect{5*w/8, (tests.elements.size()/2)*h/8 + h/4, 3*w/8, h/8};<br />
+                                                                        ^<br />
+jni/src/Views.cpp: In member function 'virtual bool TestView::deactivate()':<br />
+<font color="#0000ff">jni/src/Views.cpp:199:1: warning: no return statement in function returning non-void [-Wreturn-type]</font><br />
+ }<br />
+ ^<br />
+jni/src/Views.cpp: In member function 'virtual bool SpecificationsView::activate()':<br />
+<font color="#0000ff">jni/src/Views.cpp:243:1: warning: no return statement in function returning non-void [-Wreturn-type]</font><br />
+ }<br />
+ ^<br />
+jni/src/Views.cpp: In member function 'virtual bool SpecificationsView::deactivate()':<br />
+<font color="#0000ff">jni/src/Views.cpp:264:1: warning: no return statement in function returning non-void [-Wreturn-type]</font><br />
+ }<br />
+ ^<br />
+In file included from jni/src/Views.cpp:6:0:<br />
+jni/src/Events.h: In member function 'virtual bool QuitKeyEventProcessor::process(SDL_Event&amp;)':<br />
+<font color="#0000ff">jni/src/Events.h:21:2: warning: control reaches end of non-void function [-Wreturn-type]</font><br />
+  }<br />
+  ^<br />
+In file included from jni/src/Views.cpp:6:0:<br />
+jni/src/Events.h: In member function 'virtual bool QuitKeyEventProcessor::process(SDL_Event&amp;)':<br />
+<font color="#0000ff">jni/src/Events.h:21:2: warning: control reaches end of non-void function [-Wreturn-type]</font><br />
+  }<br />
+  ^<br />
+[armeabi] SharedLibrary  : libmain.so<br />
 [armeabi-v7a] SharedLibrary  : libmain.so<br />
 [armeabi] Install        : libmain.so =&gt; libs/armeabi/libmain.so<br />
 [armeabi-v7a] Install        : libmain.so =&gt; libs/armeabi-v7a/libmain.so<br />
@@ -294,9 +310,7 @@ debug:<br />
    [crunch] To destination dir: /run/media/devon/Share/C++/HackUMass/android/bin/res<br />
    [crunch] Crunched 0 PNG files to update cache<br />
 -package-resources:<br />
-     [aapt] Found new input file<br />
-     [aapt] Creating full resource package...<br />
-<font color="#0000ff">     [aapt] Warning: AndroidManifest.xml already defines debuggable (in http://schemas.android.com/apk/res/android); using existing value in manifest.</font><br />
+     [aapt] No changed resources or assets. SDLActivity.ap_ remains untouched<br />
 -package:<br />
 [apkbuilder] Found modified input file<br />
 [apkbuilder] Creating SDLActivity-debug-unaligned.apk and signing it with a debug key...<br />
@@ -312,16 +326,16 @@ debug:<br />
 debug:<br />
 install:<br />
      [echo] Installing /run/media/devon/Share/C++/HackUMass/android/bin/SDLActivity-debug.apk onto default emulator or device...<br />
-     [exec] 5521 KB/s (4796826 bytes in 0.848s)<br />
+     [exec] 5826 KB/s (4901768 bytes in 0.821s)<br />
      [exec] 	pkg: /data/local/tmp/SDLActivity-debug.apk<br />
      [exec] Success<br />
 BUILD SUCCESSFUL<br />
-Total time: 20 seconds<br />
+Total time: 19 seconds<br />
 <b>-------------- Build: Android in Framework (compiler: GNU GCC Compiler)---------------</b><br />
 g++ -Wall -g -std=c++0x  -I/run/media/devon/Share/C++/HackUMass/android/src/com/myapp/game -I/run/media/devon/Share/C++/HackUMass/ -c /run/media/devon/Share/C++/HackUMass/android/src/com/myapp/game/MyGame.java -o obj/Debug/android/src/com/myapp/game/MyGame.o<br />
 no classpath specified<br />
 <font color="#a00000">Process terminated with status 1 (0 minute(s), 32 second(s))</font><br />
-<font color="#a00000">0 error(s), 33 warning(s) (0 minute(s), 32 second(s))</font><br />
+<font color="#a00000">0 error(s), 36 warning(s) (0 minute(s), 32 second(s))</font><br />
 </tt>
 </body>
 </html>

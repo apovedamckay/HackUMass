@@ -91,26 +91,6 @@ public:
     bool draw();
 };
 
-class FlightCard : public SelectionBox{
-protected:
-    SelectionBox dateBox;
-    SelectionBox retDateBox;
-    SelectionBox destBox;
-    SelectionBox nonStopBox;
-    SelectionBox priceBox;
-    SelectionBox depFromBox;
-
-public:
-    std::string dest;
-    std::string date;
-    std::string retDate;
-    std::string depFrom;
-    int nonStop;
-    int price;
-
-    bool draw();
-};
-
 class HList : public GUIElement{
 protected:
 

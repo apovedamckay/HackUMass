@@ -158,6 +158,7 @@ bool TestView::activate(){
     }
 
     //views.push_back(std::make_shared<RankView>(myController));
+    views.push_back(std::make_shared<SpecificationsView>(myController, 0));
     myEvents.push_back(std::make_shared<FVMotionEventProcessor>(myController, &tests));
     myEvents.push_back(std::make_shared<SwipeDownEventProcesor>(myController, this));
     myEvents.push_back(std::make_shared<QuitKeyEventProcessor>(myController, this));
@@ -195,4 +196,69 @@ bool TestView::drawWorld(){
 }
 
 bool TestView::deactivate(){
+}
+
+SpecificationsView::SpecificationsView(EventController* controller, int _place)
+: myController(controller), screen(loadImage("screenSpecifications.png")), place(_place)
+{
+    int w, h;
+    SDL_GetWindowSize(window, &w, &h);
+    selected = loadImage("radioSelected.png");
+    unselected = loadImage("radioUnselected.png");
+    for(int i=0; i<3; i++){
+        RadioButton* tButton = new RadioButton;
+        tButton->position = SDL_Rect{w/8, 2*h/8 + i*h/8, 3*w/4, h/8};
+        switch(i){
+        case 0:
+            tButton->box = loadImage("computer.png");
+            break;
+        case 1:
+            tButton->box = loadImage("library.png");
+            break;
+        case 2:
+            tButton->box = loadImage("tutor.png");
+        }
+        buttons.push_back(tButton);
+    }
+    subject.text = "Final Subject";
+    subject.position = SDL_Rect{w/8, h/8, 7*w/8, h/8};
+    subject.font = TTF_OpenFont("Font.otf", h/16);
+    subject.boxColor = {0x1B, 0x51, 0x51, 0xFF};
+    timeBox.position = SDL_Rect{w/8, 5*h/8, 3*w/4, h/8};
+    timeBox.box = loadImage("textBox.png");
+    timeBox.font = TTF_OpenFont("Font.otf", h/12);
+}
+
+SpecificationsView::~SpecificationsView(){
+    SDL_DestroyTexture(screen);
+}
+
+bool SpecificationsView::activate(){
+    for(auto& b: buttons) myEvents.push_back(std::make_shared<SelFDownEventProcesor>(myController, b));
+    myEvents.push_back(std::make_shared<InputEventProcessor>(myController, &timeBox));
+    myEvents.push_back(std::make_shared<EditEventProcessor>(myController, &timeBox));
+    myEvents.push_back(std::make_shared<InFDownEventProcessor>(myController, &timeBox));
+    myEvents.push_back(std::make_shared<InKeyEventProcessor>(myController, &timeBox));
+    myEvents.push_back(std::make_shared<QuitKeyEventProcessor>(myController, this));
+}
+
+bool SpecificationsView::updateWorld(){
+    for(auto& b : buttons){
+        if(b->selected) b->radio = selected;
+        else b->radio = unselected;
+    }
+    return !done;
+}
+
+bool SpecificationsView::drawWorld(){
+    SDL_RenderCopy(renderer, screen, nullptr, nullptr);
+    for(auto& b : buttons){
+        b->draw();
+    }
+    subject.draw();
+    timeBox.draw();
+    return !done;
+}
+
+bool SpecificationsView::deactivate(){
 }
