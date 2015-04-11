@@ -193,3 +193,67 @@ bool TestView::drawWorld(){
 
 bool TestView::deactivate(){
 }
+
+SleepingView::SleepingView(EventController* controller)
+: myController(controller), screen(loadImage("sleepwithchecks.png")),lastSel(-1),unselected(loadImage("radioUnselected.png")),selected(loadImage("radioSelected.png"))
+{
+    int w,h;
+    SDL_GetWindowSize(window,&w,&h);
+        RadioButton tRButton;
+        tRButton.radio = unselected;
+        tRButton.position = {4*w/5,3*h/10,w,4*h/10};
+        buttons.push_back(tRButton);
+        tRButton.position = {4*w/5,5*h/10,w,6*h/10};
+        buttons.push_back(tRButton);
+        tRButton.position = {4*w/5,7*h/10,w,8*h/10};
+        buttons.push_back(tRButton);
+
+}
+
+SleepingView::~SleepingView(){
+    SDL_DestroyTexture(screen);
+    SDL_DestroyTexture(selected);
+    SDL_DestroyTexture(unselected);
+}
+
+bool SleepingView::activate(){
+    views.push_back(std::make_shared<RankView>(myController));
+    myEvents.push_back(std::make_shared<QuitKeyEventProcessor>(myController, this));
+    for(auto& r : buttons) myEvents.push_back(std::make_shared<SelFDownEventProcesor>(myController, &r));
+    myEvents.push_back(std::make_shared<SwipeDownEventProcesor>(myController, this));
+
+}
+
+bool SleepingView::updateWorld(){
+    bool sel = false;
+    for(int i = 0; i<buttons.size();i++){
+        if(butons[i].selected){
+            if(lastSel == -1){
+                lastSel = i;
+                buttons[i].radio = selected;
+            }else if(lastSel != i){
+                buttons[lastSel].selected = false;
+                buttons[lastSel].radio = unselected;
+                buttons[i].radio = selected;
+                lastSel = i;
+            }
+            sel = true;
+        }else{
+            buttons[i].radio = unselected;
+        }
+    }
+    return !done;
+}
+
+bool SleepingView::drawWorld(){
+    SDL_RenderCopy(renderer,screen,nullptr,nullptr);
+    for(auto& r : buttons){
+        r.draw();
+    }
+    return !done;
+}
+
+
+
+bool SleepingView::deactivate(){
+}
