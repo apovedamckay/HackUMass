@@ -41,9 +41,7 @@ std::string start;
 std::string dest;
 int lastmove;
 bool loading=false;
-Json::Value flightValues;
-Json::Value weatherValues;
-Json::Value flightValue;
+Json::Value testsJson;
 std::string numDays;
 
 size_t write_data(void *ptr, size_t size, size_t nmemb, void* stream){
@@ -60,118 +58,6 @@ std::string space_to_underscore(std::string value){
         value.replace(pos, 1, "_");
     }
     return value;
-}
-
-
-Json::Value cityFromQuery(std::string query){
-    HTTPRequest req("http://autocomplete.wunderground.com/aq");
-    req.addURI("query", query.substr(0,10));
-    req.sendRequest((std::string(pref_path)+"/city.json").c_str());
-
-    Json::Reader reader;
-    std::ifstream d(std::string(pref_path)+"/city.json");
-    Json::Value retValue;
-    reader.parse(d, retValue);
-
-    return retValue;
-
-}
-
-int loadWeather(std::string xlocation){
-    loading = true;
-    Json::Value location = cityFromQuery(xlocation);
-    std::string tLocation = location["RESULTS"][0]["name"].asString();
-    int pos = tLocation.find(', ');
-    SDL_Log("String: %s", tLocation.c_str());
-    SDL_Log("Length: %d, Pos: %d", tLocation.size(), pos);
-    std::string city = tLocation.substr(0, pos-1);
-    std::string state = tLocation.substr(pos+1, std::string::npos);
-
-    HTTPRequest req(std::string("http://api.wunderground.com/api/b5a7e5f9aa745e7a/forecast/q/")
-                                + state + '/' + space_to_underscore(city) + ".json");
-    req.sendRequest((std::string(pref_path) + "/weather.json").c_str());
-
-    Json::Reader reader;
-    std::ifstream d(std::string(pref_path)+"/weather.json");
-    reader.parse(d, weatherValues);
-    loading = false;
-}
-
-Json::Value codeFromString(std::string name){
-    HTTPRequest req("http://airportcode.riobard.com/search");
-    req.addURI("q", name);
-    req.addURI("fmt", "JSON");
-    req.sendRequest((std::string(pref_path)+"/airport.json").c_str());
-
-    Json::Reader reader;
-    std::ifstream d(std::string(pref_path)+"/airport.json");
-    Json::Value retValue, loadValue;
-    reader.parse(d, loadValue);
-
-    for(int i=0; i<loadValue.size(); i++){
-        retValue[i] = loadValue[i]["code"];
-    }
-
-    return retValue;
-}
-
-std::string cityFromCode(std::string code){
-    HTTPRequest req(std::string("http://airportcode.riobard.com/airport/") + code);
-    req.addURI("fmt", "JSON");
-    req.sendRequest((std::string(pref_path)+"/airport.json").c_str());
-
-    Json::Reader reader;
-    std::ifstream d(std::string(pref_path)+"/airport.json");
-    Json::Value retValue, loadValue;
-    reader.parse(d, loadValue);
-
-    return loadValue["location"].asString() + " (" + code + ')';
-}
-
-int loadFlights(void* data){
-    loading = true;
-    Json::Value source = codeFromString(start);
-    int k=0;
-    for(int i=0; i<source.size(); i++){
-        HTTPRequest req("https://api.test.sabre.com/v1/shop/flights/fares");
-        req.addURI("origin", source[i].asString());
-        req.addURI("earliestdeparturedate", "2015-03-21");
-        req.addURI("latestdeparturedate", "2015-03-25");
-        req.addURI("lengthofstay", numDays);
-        req.addURI("theme", dest);
-        req.addURI("topdestinations", Json::valueToString(15/source.size()));
-        req.addURI("pointofsalecountry", "US");
-        req.setHeader("Authorization: Bearer Shared/IDL:IceSess\/SessMgr:1\.0.IDL/Common/!ICESMS\/CERTG!ICESMSLB\/CRT.LB!-3554191116812726749!595110!0!!E2E-1");
-        req.sendRequest((std::string(pref_path)+"/flights.json").c_str());
-
-        Json::Reader reader;
-        Json::Value tempValue;
-        std::ifstream d(std::string(pref_path)+"/flights.json");
-        reader.parse(d, tempValue);
-        for(int j=0; j<tempValue["FareInfo"].size(); j++){
-            flightValues["FareInfo"][k] = tempValue["FareInfo"][j];
-            flightValues["FareInfo"][k++]["OriginLocation"] = tempValue["OriginLocation"];
-        }
-    }
-    loading=false;
-    return 0;
-}
-
-int loadFlightDetails(void* data){
-    loading = true;
-
-    Json::Value flight = flightValues["FareInfo"][(int)data];
-
-    HTTPRequest req(flight["Links"][0]["href"].asString());
-    req.setHeader("Authorization: Bearer Shared/IDL:IceSess\/SessMgr:1\.0.IDL/Common/!ICESMS\/CERTG!ICESMSLB\/CRT.LB!-3554191116812726749!595110!0!!E2E-1");
-    req.sendRequest((std::string(pref_path)+"/flight.json").c_str());
-
-    Json::Reader reader;
-    Json::Value tempValue;
-    std::ifstream d(std::string(pref_path)+"/flight.json");
-    reader.parse(d, flightValue);
-
-    loading = false;
 }
 
 SDL_Texture* loadImage(const char* path){

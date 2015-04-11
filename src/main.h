@@ -30,9 +30,7 @@ extern Json::Value flights;
 extern std::string start;
 extern std::string dest;
 extern bool loading;
-extern Json::Value flightValues;
-extern Json::Value weatherValues;
-extern Json::Value flightValue;
+extern Json::Value testsJson;
 extern std::string numDays;
 
 template <class T>

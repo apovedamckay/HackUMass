@@ -196,6 +196,11 @@ bool TestView::drawWorld(){
 }
 
 bool TestView::deactivate(){
+    for(int i=0; i<tests.elements.size()-1; i+=2){
+        if(tests.elements[i]->text.empty() || tests.elements[i+1]->text.empty()) continue;
+        testsJson[i/2]["subject"] = tests.elements[i]->text;
+        testsJson[i/2]["time"] = tests.elements[i+1]->text;
+    }
 }
 
 SpecificationsView::SpecificationsView(EventController* controller, int _place)
@@ -220,7 +225,6 @@ SpecificationsView::SpecificationsView(EventController* controller, int _place)
         }
         buttons.push_back(tButton);
     }
-    subject.text = "Final Subject";
     subject.position = SDL_Rect{w/8, h/8, 7*w/8, h/8};
     subject.font = TTF_OpenFont("Font.otf", h/16);
     subject.boxColor = {0x1B, 0x51, 0x51, 0xFF};
@@ -234,6 +238,7 @@ SpecificationsView::~SpecificationsView(){
 }
 
 bool SpecificationsView::activate(){
+    subject.text = std::string("Final: ")+testsJson[place]["subject"].asString();
     for(auto& b: buttons) myEvents.push_back(std::make_shared<SelFDownEventProcesor>(myController, b));
     myEvents.push_back(std::make_shared<InputEventProcessor>(myController, &timeBox));
     myEvents.push_back(std::make_shared<EditEventProcessor>(myController, &timeBox));
