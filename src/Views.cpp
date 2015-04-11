@@ -444,9 +444,8 @@ bool MedsView::drawWorld(){
 
 bool MedsView::deactivate(){
     for(int i=0; i<meds.elements.size()-1; i+=2){
-    for(int i=0; i<meds.elements.size()-1; i+=2){
         if(meds.elements[i]->text.empty() || meds.elements[i+1]->text.empty()) continue;
-        testsJson[i/2]["subject"] = meds.elements[i]->text;
-        testsJson[i/2]["time"] = meds.elements[i+1]->text;
+        medsJson[i/2]["name"] = meds.elements[i]->text;
+        medsJson[i/2]["dose"] = meds.elements[i+1]->text;
     }
 }
