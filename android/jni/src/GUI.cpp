@@ -1,7 +1,7 @@
 #include <cmath>
 
 //#include "SDL2_gfxPrimitives.h"
-#include "SDL_image.h"d
+#include "SDL_image.h"
 #include "SDL_ttf.h"
 
 #include "GUI.h"
@@ -102,51 +102,6 @@ bool RadioButton::draw(){
     textBox.draw();
 }
 
-bool FlightCard::draw(){
-    int w, h;
-    SDL_GetWindowSize(window, &w, &h);
-    if(position.x + position.w < 0 || position.x > w) return false;
-    SDL_SetRenderDrawColor(renderer, 0x18, 0x5C, 0x83, 0xFF);
-    SDL_RenderFillRect(renderer, &position);
-
-    depFromBox.position = {position.x, position.y, position.w, position.h/6};
-    depFromBox.text = depFrom;
-    depFromBox.font = font;
-    depFromBox.drawBox = false;
-    depFromBox.draw();
-
-    destBox.position = {position.x, position.y + position.h/6, position.w, position.h/6};
-    destBox.text = dest;
-    destBox.font = font;
-    destBox.drawBox = false;
-    destBox.draw();
-
-    dateBox.position = {position.x, position.y + position.h/3, position.w, position.h/5};
-    dateBox.text = date;
-    dateBox.font = font;
-    dateBox.drawBox = false;
-    dateBox.draw();
-
-    retDateBox.position = {position.x, position.y + position.h/2, position.w, position.h/5};
-    retDateBox.text = retDate;
-    retDateBox.font = font;
-    retDateBox.drawBox = false;
-    retDateBox.draw();
-
-    priceBox.position = {position.x, position.y + 2*position.h/3, position.w, position.h/5};
-    priceBox.text = Json::valueToString(price);
-    priceBox.font = font;
-    priceBox.drawBox = false;
-    priceBox.draw();
-
-    nonStopBox.position = {position.x, position.y + 5*position.h/6, position.w, position.h/5};
-    nonStopBox.text = Json::valueToString(nonStop);
-    if(nonStop == 0) nonStopBox.text = "N/A";
-    nonStopBox.font = font;
-    nonStopBox.drawBox = false;
-    nonStopBox.draw();
-}
-
 template<class T>
 int sgn(T num){
     if (num > 0)
@@ -192,7 +147,7 @@ bool HList::moveElements(int aax, int aay){
             }
         }
         if(s > elements[select]->position.w/2){
-            elements[select]->selected = false;
+            //elements[select]->selected = false;
             select -= sgn(elements[select]->position.x);
             moveElement = true;
             begin = false;

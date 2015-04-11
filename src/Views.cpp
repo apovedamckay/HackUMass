@@ -81,10 +81,12 @@ bool LoadingView::updateWorld(){
 WelcomeView::WelcomeView(EventController* controller)
 : myController(controller), screen(loadImage("screen.png"))
 {
+    int w, h;
+    SDL_GetWindowSize(window, &w, &h);
     meds.box = loadImage("medsBox.png");
-    meds.position = {w/8, h/4, 3*w/8, h/2};
+    meds.position = SDL_Rect{w/8, h/4, 3*w/4, h/4};
     tests.box = loadImage("testsBox");
-    tests.position = {w/2, h/4, 3*w/8, h/2};
+    tests.position = SDL_Rect{w/8, h/2, 3*w/4, h/4};
 
 }
 
@@ -102,7 +104,7 @@ bool WelcomeView::activate(){
 
 bool WelcomeView::updateWorld(){
     if(meds.selected){
-        views.push_back(std::make_shared<MedsView>(myController));
+    //    views.push_back(std::make_shared<MedsView>(myController));
     }
     else if(tests.selected){
         views.push_back(std::make_shared<TestView>(myController));
@@ -113,26 +115,40 @@ bool WelcomeView::updateWorld(){
 
 bool WelcomeView::drawWorld(){
     SDL_RenderCopy(renderer, screen, nullptr, nullptr);
+    meds.draw();
+    tests.draw();
     return !done;
 }
 
-bool TestView::deactivate(){
+bool WelcomeView::deactivate(){
 }
 
 TestView::TestView(EventController* controller)
-: myController(controller), screen(loadImage("screenTest.png"))
+: myController(controller), screen(loadImage("screen.png"))
 {
 }
 
 TestView::~TestView(){
     SDL_DestroyTexture(screen);
+    for(auto& b : tests.elements){
+        SDL_DestroyTexture(b->box);
+    }
 }
 
 bool TestView::activate(){
+    SDL_GetWindowSize(window, &w, &h);
     for(int i=0; i<3; i++){
         InputBox* tBox = new InputBox;
-        tBox->position = {w/8, i*h/8 + h/4, 3*w/4, h/8};
-        tBox->box = loadImage("TExtBox.png");
+        tBox->position = SDL_Rect{w/8, i*h/8 + h/4, w/2, h/8};
+        tBox->box = loadImage("TextBox.png");
+        myEvents.push_back(std::make_shared<InputEventProcessor>(myController, tBox));
+        myEvents.push_back(std::make_shared<EditEventProcessor>(myController, tBox));
+        myEvents.push_back(std::make_shared<InFDownEventProcessor>(myController, tBox));
+        myEvents.push_back(std::make_shared<InKeyEventProcessor>(myController, tBox));
+        tests.elements.push_back(tBox);
+        tBox = new InputBox;
+        tBox->position = SDL_Rect{5*w/8, i*h/8 + h/4, w/4, h/8};
+        tBox->box = loadImage("TextBox.png");
         myEvents.push_back(std::make_shared<InputEventProcessor>(myController, tBox));
         myEvents.push_back(std::make_shared<EditEventProcessor>(myController, tBox));
         myEvents.push_back(std::make_shared<InFDownEventProcessor>(myController, tBox));
@@ -140,16 +156,38 @@ bool TestView::activate(){
         tests.elements.push_back(tBox);
     }
 
-    views.push_back(std::make_shared<RankView>(myController));
+    //views.push_back(std::make_shared<RankView>(myController));
+    myEvents.push_back(std::make_shared<FVMotionEventProcessor>(myController, &tests));
+    myEvents.push_back(std::make_shared<SwipeDownEventProcesor>(myController, this));
     myEvents.push_back(std::make_shared<QuitKeyEventProcessor>(myController, this));
 }
 
 bool TestView::updateWorld(){
-    return !done
+    if(!tests.elements.back()->text.empty()){
+        InputBox* tBox = new InputBox;
+        tBox->position = SDL_Rect{w/8, tests.elements.size()*h/8 + h/4, w/2, h/8};
+        tBox->box = loadImage("TextBox.png");
+        myEvents.push_back(std::make_shared<InputEventProcessor>(myController, tBox));
+        myEvents.push_back(std::make_shared<EditEventProcessor>(myController, tBox));
+        myEvents.push_back(std::make_shared<InFDownEventProcessor>(myController, tBox));
+        myEvents.push_back(std::make_shared<InKeyEventProcessor>(myController, tBox));
+        tests.elements.push_back(tBox);
+        tBox = new InputBox;
+        tBox->position = SDL_Rect{5*w/8, (tests.elements.size()/2)*h/8 + h/4, w/4, h/8};
+        tBox->box = loadImage("TextBox.png");
+        myEvents.push_back(std::make_shared<InputEventProcessor>(myController, tBox));
+        myEvents.push_back(std::make_shared<EditEventProcessor>(myController, tBox));
+        myEvents.push_back(std::make_shared<InFDownEventProcessor>(myController, tBox));
+        myEvents.push_back(std::make_shared<InKeyEventProcessor>(myController, tBox));
+        tests.elements.push_back(tBox);
+
+    }
+    return !done;
 }
 
 bool TestView::drawWorld(){
     SDL_RenderCopy(renderer, screen, nullptr, nullptr);
+    tests.draw();
     return !done;
 }
 

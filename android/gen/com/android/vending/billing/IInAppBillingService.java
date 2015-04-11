@@ -1,6 +1,6 @@
 /*
  * This file is auto-generated.  DO NOT MODIFY.
- * Original file: /run/media/devon/Share/C++/HackDFW/android/src/com/android/vending/billing/IInAppBillingService.aidl
+ * Original file: /run/media/devon/Share/C++/HackUMass/android/src/com/android/vending/billing/IInAppBillingService.aidl
  */
 package com.android.vending.billing;
 /**

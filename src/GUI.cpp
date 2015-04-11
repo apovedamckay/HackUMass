@@ -1,7 +1,7 @@
 #include <cmath>
 
 //#include "SDL2_gfxPrimitives.h"
-#include "SDL_image.h"d
+#include "SDL_image.h"
 #include "SDL_ttf.h"
 
 #include "GUI.h"
@@ -147,7 +147,7 @@ bool HList::moveElements(int aax, int aay){
             }
         }
         if(s > elements[select]->position.w/2){
-            elements[select]->selected = false;
+            //elements[select]->selected = false;
             select -= sgn(elements[select]->position.x);
             moveElement = true;
             begin = false;

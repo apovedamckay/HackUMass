@@ -107,7 +107,7 @@ public:
 	}
 };
 
-class FMotionEventProcessor : public EventProcessor{
+/*class FMotionEventProcessor : public EventProcessor{
 protected:
 	FlightView* myView;
 	int wait;
@@ -126,7 +126,7 @@ public:
         if(enclosedPoint(xy, screen)) myView->cardList.moveElements(-3*w*event.tfinger.dx, 0);
 		return true;
 	}
-};
+};*/
 
 class FVMotionEventProcessor : public EventProcessor{
 protected:
@@ -181,12 +181,12 @@ public:
 	}
 };
 
-class InFDownEventProcesor : public EventProcessor{
+class InFDownEventProcessor : public EventProcessor{
 protected:
 	InputBox *myBox;
 
 public:
-	InFDownEventProcesor(EventController* controller, InputBox* that)
+	InFDownEventProcessor(EventController* controller, InputBox* that)
 	: EventProcessor(controller, SDL_FINGERUP), myBox(that)
 	{}
 

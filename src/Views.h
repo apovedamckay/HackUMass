@@ -47,7 +47,8 @@ class TestView : public View{
 protected:
     EventController* myController;
     SDL_Texture* screen;
-    HList tests;
+    VList tests;
+    int w,h;
 
 public:
     TestView(EventController* controller);

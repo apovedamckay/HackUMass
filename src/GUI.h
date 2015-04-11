@@ -116,7 +116,7 @@ protected:
 
 public:
     int select, lastmove;
-    std::vector<FlightCard*> elements;
+    std::vector<InputBox*> elements;
     float accel[2], vel[2];
     bool moveElement, begin, infinitescroll, snap;
 

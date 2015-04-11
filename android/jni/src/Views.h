@@ -30,6 +30,8 @@ class WelcomeView : public View{
 protected:
     EventController* myController;
     SDL_Texture* screen;
+    SelectionBox meds;
+    SelectionBox tests;
 
 public:
     WelcomeView(EventController* controller);
@@ -41,17 +43,16 @@ public:
     bool deactivate();
 };
 
-class FlightView : public View{
+class TestView : public View{
 protected:
     EventController* myController;
-    SelectionBox submit, depFrom, destination, departureDate, returnDate, price, nonstop;
     SDL_Texture* screen;
+    VList tests;
+    int w,h;
 
 public:
-    FlightView(EventController* controller);
-    ~FlightView();
-
-    HList cardList;
+    TestView(EventController* controller);
+    ~TestView();
 
     bool activate();
     bool updateWorld();
@@ -59,15 +60,14 @@ public:
     bool deactivate();
 };
 
-class InfoView : public View{
+class RankView : public View{
 protected:
     EventController* myController;
-    SelectionBox fctext, icon, departTime, arrivalTime, layover, timezones, flightNumbers;
     SDL_Texture* screen;
 
 public:
-    InfoView(EventController* controller);
-    ~InfoView();
+    RankView(EventController* controller);
+    ~RankView();
 
     bool activate();
     bool updateWorld();
@@ -75,15 +75,14 @@ public:
     bool deactivate();
 };
 
-class CurLocationView : public View{
+class SleepingView : public View{
 protected:
     EventController* myController;
-    InputBox textBox;
     SDL_Texture* screen;
 
 public:
-    CurLocationView(EventController* myController);
-    ~CurLocationView();
+    SleepingView(EventController* controller);
+    ~SleepingView();
 
     bool activate();
     bool updateWorld();
@@ -91,20 +90,14 @@ public:
     bool deactivate();
 };
 
-class DestLocationView : public View{
+class RestrictionsView : public View{
 protected:
     EventController* myController;
-    InputBox textBox;
     SDL_Texture* screen;
-    SelectionBox submit;
-    std::vector<RadioButton> buttons;
-    int lastSel;
-    SDL_Texture* selected;
-    SDL_Texture* unselected;
 
 public:
-    DestLocationView(EventController* myController);
-    ~DestLocationView();
+    RestrictionsView(EventController* controller);
+    ~RestrictionsView();
 
     bool activate();
     bool updateWorld();
@@ -112,15 +105,59 @@ public:
     bool deactivate();
 };
 
-class TimeSpentView : public View{
+class SpecificationsView : public View{
 protected:
     EventController* myController;
     SDL_Texture* screen;
-    std::vector<SelectionBox> boxes;
 
 public:
-    TimeSpentView(EventController* myController);
-    ~TimeSpentView();
+    SpecificationsView(EventController* controller);
+    ~SpecificationsView();
+
+    bool activate();
+    bool updateWorld();
+    bool drawWorld();
+    bool deactivate();
+};
+
+class FinalTimeView : public View{
+protected:
+    EventController* myController;
+    SDL_Texture* screen;
+
+public:
+    FinalTimeView(EventController* controller);
+    ~FinalTimeView();
+
+    bool activate();
+    bool updateWorld();
+    bool drawWorld();
+    bool deactivate();
+};
+
+class MedsView : public View{
+protected:
+    EventController* myController;
+    SDL_Texture* screen;
+
+public:
+    MedsView(EventController* controller);
+    ~MedsView();
+
+    bool activate();
+    bool updateWorld();
+    bool drawWorld();
+    bool deactivate();
+};
+
+class IntAndSideView : public View{
+protected:
+    EventController* myController;
+    SDL_Texture* screen;
+
+public:
+    IntAndSideView(EventController* controller);
+    ~IntAndSideView();
 
     bool activate();
     bool updateWorld();
